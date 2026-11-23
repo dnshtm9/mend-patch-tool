@@ -717,7 +717,7 @@ function run(args: string[]): { code: number; out: string[] } {
     const was = tree.original(p);
     const now = tree.now.get(p)!;
     if (was === now) continue;
-    if (renamed.has(p) || [...renamed.values()].includes(p)) continue;
+    if (renamed.has(p) || (now === null && [...renamed.values()].includes(p))) continue;
     rows.push({ key: p, line: `${was === null ? 'A' : now === null ? 'D' : 'M'} ${p}` });
   }
   rows.sort((a, b) => byBytes(a.key, b.key));
